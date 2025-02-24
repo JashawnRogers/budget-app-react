@@ -21,7 +21,7 @@ const SignUp = ({ submitNewUser }) => {
         }
 
         submitNewUser(newUser)
-        return navigate('/dashboard')
+        return navigate('/Dashboard')
     }
 
 
