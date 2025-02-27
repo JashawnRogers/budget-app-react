@@ -1,5 +1,6 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import User from '../../db/userModel.js'
 
 const router = express.Router()
@@ -33,18 +34,51 @@ router.route('/register').post( async (req, res) => {
             err: err.message,
         })
     }
-
-    // THIS DOES NOT INSERT NEW RECORD TO USERS COLLECTION
 })
 
-router.route('/login').post((req, res) => {
+router.route('/login').post( async ( req, res) => {
     // Log In
     try {
-        const { name, email, password } = req.body
-        console.log(req.body)
-        res.send(`${req.body}`)
+        // Check if email exists
+        const user = await User.findOne({ email: req.body.email })
+
+        if (!user) {
+            return res.status(400).send({
+                message: 'Email not found'
+            })
+        }
+
+        // Compare password entered to db
+        const passwordCheck = await bcrypt.compare(req.body.password, user.password)
+
+        if (!passwordCheck) {
+            return res.status(400).send({
+                message: 'Incorrect password'
+            })
+        }
+
+        // Create JWT token
+        const token = jwt.sign(
+            {
+                userId: user._id,
+                userEmail: user.email
+            },
+            "RANDOM-TOKEN",
+            { expiresIn: "24h" }
+        )
+
+        // Successful login
+        res.status(200).send({
+            message: 'Successful login',
+            email: user.email,
+            token
+        })
+
     } catch (err) {
-        console.error(`${err}`)
+        res.status(500).send({
+            message: 'Server error',
+            err: err.message,
+        })
     }
     
 })
