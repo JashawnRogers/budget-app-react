@@ -2,13 +2,14 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import User from '../../db/userModel.js'
+import auth from '../../auth.js'
 
 const router = express.Router()
 
 
 
 router.route('/').get((req, res) => {
-    // render Landing Page
+    // Render landing Page
     res.send(`Render Landing Page`)
 })
 
@@ -83,6 +84,14 @@ router.route('/login').post( async ( req, res) => {
     
 })
 
-
+// free endpoint
+router.route('/free-endpoint').get( auth, async (req, res) => {
+    res.json({ message: 'You are free to access me anytime' })
+})
+  
+// authentication endpoint
+router.route('/auth-endpoint').get( auth, async (req, res) => {
+    res.json({ message: 'You are free to access me anytime' })
+})
 
 export default router
