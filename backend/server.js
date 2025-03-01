@@ -12,7 +12,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // Handles form data
 
 app.use((req, res, next) => {
+    // Allows cross-origin request from any website - potential to be specific in future
     res.setHeader('Access-Control-Allow-Origin', '*')
+    // Setting custom headers to be allowed
     res.setHeader(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
