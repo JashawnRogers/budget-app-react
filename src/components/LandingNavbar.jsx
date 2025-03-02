@@ -3,7 +3,7 @@ import Button
  from './Button'
 const LandingNavbar = () => {
   return (
-    <nav className='h-[13vh]'>
+    <nav className='h-[8vh] bg-green-200'>
         <div className='flex m-auto justify-between h-auto'>
             <h1 className='m-4 text-4xl'>Title</h1>
             <Button 
