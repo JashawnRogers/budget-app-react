@@ -7,7 +7,6 @@ import LandingNavbar from '../components/LandingNavbar'
 const MainLayout = () => {
   return (
     <>
-        <LandingNavbar />
         <Outlet />
         <ToastContainer />
     </>
