@@ -1,6 +1,7 @@
 import React from 'react'
-import Button
- from './Button'
+import Button from '../commonComponents/Button'
+
+
 const LandingNavbar = () => {
   return (
     <nav className='h-[8vh] bg-green-200'>

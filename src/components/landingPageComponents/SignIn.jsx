@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Card from './Card'
-import Button from './Button'
+import Card from '../commonComponents/Card'
+import Button from '../commonComponents/Button'
 import { toast } from 'react-toastify'
 
 const SignIn = ({ submitLogIn }) => {
